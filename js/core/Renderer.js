@@ -104,13 +104,19 @@ export class Renderer {
                 if (tile === 2) {
                     if (theme.name === "Elevator") {
                         this.drawSprite('TILESET', TILESET_FRAMES.CHECKERED_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
+                    } else if (theme.name === "Overgrown Rooftop") {
+                        this.drawSprite('TILESET', TILESET_FRAMES.GARDEN_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
                     } else {
                         this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
                     }
                 } 
                 // Draw Wall
                 else if (tile === 1) {
-                    this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_WALL, px, py, TILE_SIZE, TILE_SIZE);
+                    if (theme.name === "Overgrown Rooftop") {
+                        this.drawSprite('TILESET', TILESET_FRAMES.GARDEN_WALL, px, py, TILE_SIZE, TILE_SIZE);
+                    } else {
+                        this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_WALL, px, py, TILE_SIZE, TILE_SIZE);
+                    }
                 }
             }
         }

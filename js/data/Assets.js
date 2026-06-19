@@ -48,11 +48,18 @@ export const NPC_FRAMES = {
 };
 
 export const TILESET_FRAMES = {
-    OFFICE_FLOOR: { x: 247, y: 75, w: 250, h: 170 },
-    OFFICE_WALL: { x: 247, y: 75, w: 250, h: 80 },
+    // Office / Hub
+    OFFICE_FLOOR: { x: 415, y: 250, w: 170, h: 170 },
+    OFFICE_WALL: { x: 250, y: 80, w: 240, h: 80 },
     OFFICE_DESK: { x: 250, y: 265, w: 165, h: 75 },
     CHECKERED_FLOOR: { x: 588, y: 265, w: 165, h: 165 },
     ELEVATOR_DOOR: { x: 420, y: 418, w: 165, h: 180 },
     PLANT: { x: 520, y: 170, w: 60, h: 80 },
     COMPUTER: { x: 265, y: 245, w: 45, h: 45 },
+    
+    // Overgrown Room (GARDEN)
+    GARDEN_FLOOR: { x: 588, y: 850, w: 165, h: 165 }, // Using the rug area as floor
+    GARDEN_WALL: { x: 250, y: 80, w: 240, h: 80 }, // Reuse wall for now
+    GARDEN_PLANT: { x: 595, y: 690, w: 60, h: 80 },
+    GARDEN_LIGHT: { x: 540, y: 110, w: 90, h: 30 },
 };
