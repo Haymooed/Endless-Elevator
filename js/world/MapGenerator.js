@@ -8,13 +8,13 @@ export class MapGenerator {
         
         let themeKey = 'OFFICE';
         if (floorNum === 0) themeKey = 'ELEVATOR';
-        else if (floorNum === 1) themeKey = 'GARDEN'; // Force floor 1 to be GARDEN for testing
+        else if (floorNum === 1) themeKey = 'GARDEN';
         else {
             const themes = Object.keys(THEMES).filter(k => k !== 'ELEVATOR' && k !== 'VOID');
             themeKey = themes[Math.floor(Math.random() * themes.length)];
         }
         
-        const theme = THEMES[themeKey];
+        const theme = { ...THEMES[themeKey], id: themeKey };
         const startX = Math.floor(width/2);
         const startY = Math.floor(height/2);
         

@@ -104,7 +104,7 @@ export class Renderer {
                 if (tile === 2) {
                     if (theme.name === "Elevator") {
                         this.drawSprite('TILESET', TILESET_FRAMES.CHECKERED_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
-                    } else if (theme.name === "Overgrown Rooftop") {
+                    } else if (theme.id === "GARDEN") {
                         this.drawSprite('OVERGROWN', TILESET_FRAMES.GARDEN_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
                     } else {
                         this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
@@ -112,10 +112,11 @@ export class Renderer {
                 } 
                 // Draw Wall
                 else if (tile === 1) {
-                    if (theme.name === "Overgrown Rooftop") {
-                        this.drawSprite('OVERGROWN', TILESET_FRAMES.GARDEN_WALL, px, py, TILE_SIZE, TILE_SIZE);
+                    if (theme.id === "GARDEN") {
+                        // Walls in the tileset are tall, so we offset them upwards to make them look correct
+                        this.drawSprite('OVERGROWN', TILESET_FRAMES.GARDEN_WALL, px, py - TILE_SIZE, TILE_SIZE, TILE_SIZE * 2);
                     } else {
-                        this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_WALL, px, py, TILE_SIZE, TILE_SIZE);
+                        this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_WALL, px, py - TILE_SIZE, TILE_SIZE, TILE_SIZE * 2);
                     }
                 }
             }

@@ -49,9 +49,9 @@ export const NPC_FRAMES = {
 };
 
 export const TILESET_FRAMES = {
-    // Office / Hub
-    OFFICE_FLOOR: { x: 415, y: 250, w: 170, h: 170 },
-    OFFICE_WALL: { x: 250, y: 80, w: 240, h: 80 },
+    // Office / Hub - Precise 32x32 based sampling
+    OFFICE_FLOOR: { x: 430, y: 280, w: 100, h: 100 },
+    OFFICE_WALL: { x: 250, y: 80, w: 240, h: 170 },
     OFFICE_DESK: { x: 250, y: 265, w: 165, h: 75 },
     CHECKERED_FLOOR: { x: 588, y: 265, w: 165, h: 165 },
     ELEVATOR_DOOR: { x: 420, y: 418, w: 165, h: 180 },
@@ -59,8 +59,8 @@ export const TILESET_FRAMES = {
     COMPUTER: { x: 265, y: 245, w: 45, h: 45 },
     
     // Overgrown Room (GARDEN) - Uses OVERGROWN sheet
-    GARDEN_FLOOR: { x: 415, y: 250, w: 170, h: 170 },
-    GARDEN_WALL: { x: 250, y: 80, w: 240, h: 240 }, // High bush walls
+    GARDEN_FLOOR: { x: 430, y: 280, w: 100, h: 100 },
+    GARDEN_WALL: { x: 250, y: 80, w: 240, h: 240 }, 
     GARDEN_PLANT: { x: 595, y: 690, w: 60, h: 80 },
     GARDEN_ELEVATOR: { x: 420, y: 418, w: 165, h: 180 },
 };
