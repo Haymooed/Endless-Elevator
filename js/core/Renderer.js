@@ -5,7 +5,7 @@ export class Renderer {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
-        this.camera = { x: 0, y: 0, zoom: 2.5 };
+        this.camera = { x: 0, y: 0, zoom: 1.5 };
         this.sprites = {};
         this.particles = [];
         this.loaded = false;
@@ -100,12 +100,17 @@ export class Renderer {
                 const px = c * TILE_SIZE;
                 const py = r * TILE_SIZE;
 
-                if (tile === 2) { // Floor
-                    this.ctx.fillStyle = theme.floor;
-                    this.ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
-                } else if (tile === 1) { // Wall
-                    this.ctx.fillStyle = theme.wall;
-                    this.ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
+                // Draw Floor
+                if (tile === 2) {
+                    if (theme.name === "Elevator") {
+                        this.drawSprite('TILESET', TILESET_FRAMES.CHECKERED_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
+                    } else {
+                        this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
+                    }
+                } 
+                // Draw Wall
+                else if (tile === 1) {
+                    this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_WALL, px, py, TILE_SIZE, TILE_SIZE);
                 }
             }
         }
@@ -115,16 +120,23 @@ export class Renderer {
         const isWalking = Math.abs(player.vx) > 0 || Math.abs(player.vy) > 0;
         let frame = PROTAGONIST_FRAMES.IDLE_FRONT;
         
+        // Determine direction
+        if (player.vy < 0) frame = PROTAGONIST_FRAMES.IDLE_BACK;
+        else if (player.vx < 0) frame = PROTAGONIST_FRAMES.IDLE_LEFT;
+        
         if (isWalking) {
             const animFrame = Math.floor(Date.now() / 200) % 2;
-            frame = animFrame === 0 ? PROTAGONIST_FRAMES.WALK_FRONT : PROTAGONIST_FRAMES.IDLE_FRONT;
+            if (player.vy < 0) frame = animFrame === 0 ? PROTAGONIST_FRAMES.WALK_BACK : PROTAGONIST_FRAMES.IDLE_BACK;
+            else if (player.vx < 0) frame = animFrame === 0 ? PROTAGONIST_FRAMES.WALK_LEFT : PROTAGONIST_FRAMES.IDLE_LEFT;
+            else frame = animFrame === 0 ? PROTAGONIST_FRAMES.WALK_FRONT : PROTAGONIST_FRAMES.IDLE_FRONT;
         }
 
         if (lastHit && Date.now() - lastHit < 200) {
             this.ctx.globalAlpha = 0.5;
         }
         
-        this.drawSprite('PROTAGONIST', frame, player.x - 4, player.y - 8, 32, 32);
+        // Scale player appropriately (150x420 is original, we want ~32x64 in game)
+        this.drawSprite('PROTAGONIST', frame, player.x - 4, player.y - 40, 32, 64);
         this.ctx.globalAlpha = 1.0;
     }
 
@@ -147,7 +159,11 @@ export class Renderer {
 
     renderInteractable(obj) {
         if (obj.type === 'ELEVATOR') {
-            this.drawSprite('TILESET', TILESET_FRAMES.ELEVATOR_DOOR, obj.x, obj.y, 64, 64);
+            this.drawSprite('TILESET', TILESET_FRAMES.ELEVATOR_DOOR, obj.x - 16, obj.y - 32, 64, 80);
+        } else if (obj.type === 'DESK') {
+            this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_DESK, obj.x, obj.y, 48, 32);
+        } else if (obj.type === 'PLANT') {
+            this.drawSprite('TILESET', TILESET_FRAMES.PLANT, obj.x + 8, obj.y, 16, 32);
         }
     }
 

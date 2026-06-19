@@ -7,15 +7,16 @@ export const SPRITE_SHEETS = {
     NPCS_ALT: 'assets/sprites/mysterious%20NPCs%20for%20your%20game%202.png',
 };
 
+// Based on visual inspection, each frame is roughly 256x512 for full height
 export const PROTAGONIST_FRAMES = {
-    IDLE_FRONT: { x: 0, y: 0, w: 256, h: 256 },
-    IDLE_FRONT_LEFT: { x: 256, y: 0, w: 256, h: 256 },
-    IDLE_LEFT: { x: 512, y: 0, w: 256, h: 256 },
-    IDLE_BACK: { x: 768, y: 0, w: 256, h: 256 },
-    WALK_FRONT: { x: 0, y: 256, w: 256, h: 256 },
-    WALK_FRONT_LEFT: { x: 256, y: 256, w: 256, h: 256 },
-    WALK_LEFT: { x: 512, y: 256, w: 256, h: 256 },
-    WALK_BACK: { x: 768, y: 256, w: 256, h: 256 },
+    IDLE_FRONT: { x: 50, y: 50, w: 150, h: 420 },
+    IDLE_FRONT_LEFT: { x: 300, y: 50, w: 150, h: 420 },
+    IDLE_LEFT: { x: 550, y: 50, w: 150, h: 420 },
+    IDLE_BACK: { x: 800, y: 50, w: 150, h: 420 },
+    WALK_FRONT: { x: 50, y: 550, w: 150, h: 420 },
+    WALK_FRONT_LEFT: { x: 300, y: 550, w: 150, h: 420 },
+    WALK_LEFT: { x: 550, y: 550, w: 150, h: 420 },
+    WALK_BACK: { x: 800, y: 550, w: 150, h: 420 },
 };
 
 export const ITEM_FRAMES = {
@@ -47,11 +48,11 @@ export const NPC_FRAMES = {
 };
 
 export const TILESET_FRAMES = {
-    OFFICE_WALL_TOP: { x: 250, y: 80, w: 440, h: 90 },
-    OFFICE_FLOOR: { x: 250, y: 250, w: 440, h: 200 },
-    OFFICE_DESK: { x: 250, y: 250, w: 440, h: 150 },
-    HOTEL_WALL: { x: 770, y: 80, w: 180, h: 400 },
-    HOTEL_FLOOR: { x: 250, y: 420, w: 440, h: 200 },
-    PLANT: { x: 250, y: 250, w: 100, h: 150 },
-    ELEVATOR_DOOR: { x: 250, y: 420, w: 150, h: 200 },
+    OFFICE_FLOOR: { x: 247, y: 75, w: 250, h: 170 },
+    OFFICE_WALL: { x: 247, y: 75, w: 250, h: 80 },
+    OFFICE_DESK: { x: 250, y: 265, w: 165, h: 75 },
+    CHECKERED_FLOOR: { x: 588, y: 265, w: 165, h: 165 },
+    ELEVATOR_DOOR: { x: 420, y: 418, w: 165, h: 180 },
+    PLANT: { x: 520, y: 170, w: 60, h: 80 },
+    COMPUTER: { x: 265, y: 245, w: 45, h: 45 },
 };
