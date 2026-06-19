@@ -75,7 +75,7 @@ export class Renderer {
         this.renderMap(map, theme);
 
         // Interactables
-        interactables.forEach(obj => this.renderInteractable(obj));
+        interactables.forEach(obj => this.renderInteractable(obj, theme));
 
         // Items
         items.forEach(item => this.renderItem(item));
@@ -105,7 +105,7 @@ export class Renderer {
                     if (theme.name === "Elevator") {
                         this.drawSprite('TILESET', TILESET_FRAMES.CHECKERED_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
                     } else if (theme.name === "Overgrown Rooftop") {
-                        this.drawSprite('TILESET', TILESET_FRAMES.GARDEN_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
+                        this.drawSprite('OVERGROWN', TILESET_FRAMES.GARDEN_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
                     } else {
                         this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_FLOOR, px, py, TILE_SIZE, TILE_SIZE);
                     }
@@ -113,7 +113,7 @@ export class Renderer {
                 // Draw Wall
                 else if (tile === 1) {
                     if (theme.name === "Overgrown Rooftop") {
-                        this.drawSprite('TILESET', TILESET_FRAMES.GARDEN_WALL, px, py, TILE_SIZE, TILE_SIZE);
+                        this.drawSprite('OVERGROWN', TILESET_FRAMES.GARDEN_WALL, px, py, TILE_SIZE, TILE_SIZE);
                     } else {
                         this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_WALL, px, py, TILE_SIZE, TILE_SIZE);
                     }
@@ -163,9 +163,11 @@ export class Renderer {
         }
     }
 
-    renderInteractable(obj) {
+    renderInteractable(obj, theme) {
         if (obj.type === 'ELEVATOR') {
-            this.drawSprite('TILESET', TILESET_FRAMES.ELEVATOR_DOOR, obj.x - 16, obj.y - 32, 64, 80);
+            const sheet = theme.name === "Overgrown Rooftop" ? 'OVERGROWN' : 'TILESET';
+            const frame = theme.name === "Overgrown Rooftop" ? TILESET_FRAMES.GARDEN_ELEVATOR : TILESET_FRAMES.ELEVATOR_DOOR;
+            this.drawSprite(sheet, frame, obj.x - 16, obj.y - 32, 64, 80);
         } else if (obj.type === 'DESK') {
             this.drawSprite('TILESET', TILESET_FRAMES.OFFICE_DESK, obj.x, obj.y, 48, 32);
         } else if (obj.type === 'PLANT') {

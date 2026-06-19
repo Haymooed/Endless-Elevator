@@ -1,10 +1,11 @@
 export const SPRITE_SHEETS = {
-    PROTAGONIST: 'assets/sprites/protagonist%20sprite%20sheet.png',
-    TILESET: 'assets/sprites/tileset%20for%20a%20liminal%20space%20office%20building%20and%20a%20creepy%20hotel.png',
-    ITEMS: 'assets/sprites/pixel%20art%20RPG%20item%20icons.png',
-    MONSTERS: 'assets/sprites/creepy%20liminal%20space%20monsters.png',
-    NPCS: 'assets/sprites/mysterious%20NPCs%20for%20your%20game.png',
-    NPCS_ALT: 'assets/sprites/mysterious%20NPCs%20for%20your%20game%202.png',
+    PROTAGONIST: 'assets/sprites/protagonist_spritesheet_cozy_tired.png',
+    TILESET: 'assets/sprites/liminal_office_hotel_tileset_pixelart.png',
+    OVERGROWN: 'assets/sprites/overgrown_tileset_pixelart.png',
+    ITEMS: 'assets/sprites/rpg_item_icons_sheet_pixelart.png',
+    MONSTERS: 'assets/sprites/liminal_monsters_spritesheet_pixelart.png',
+    NPCS: 'assets/sprites/mysterious_npcs_spritesheet_1.png',
+    NPCS_ALT: 'assets/sprites/mysterious_npcs_spritesheet_2.png',
 };
 
 // Based on visual inspection, each frame is roughly 256x512 for full height
@@ -57,9 +58,9 @@ export const TILESET_FRAMES = {
     PLANT: { x: 520, y: 170, w: 60, h: 80 },
     COMPUTER: { x: 265, y: 245, w: 45, h: 45 },
     
-    // Overgrown Room (GARDEN)
-    GARDEN_FLOOR: { x: 588, y: 850, w: 165, h: 165 }, // Using the rug area as floor
-    GARDEN_WALL: { x: 250, y: 80, w: 240, h: 80 }, // Reuse wall for now
+    // Overgrown Room (GARDEN) - Uses OVERGROWN sheet
+    GARDEN_FLOOR: { x: 415, y: 250, w: 170, h: 170 },
+    GARDEN_WALL: { x: 250, y: 80, w: 240, h: 240 }, // High bush walls
     GARDEN_PLANT: { x: 595, y: 690, w: 60, h: 80 },
-    GARDEN_LIGHT: { x: 540, y: 110, w: 90, h: 30 },
+    GARDEN_ELEVATOR: { x: 420, y: 418, w: 165, h: 180 },
 };
