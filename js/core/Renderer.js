@@ -12,15 +12,28 @@ export class Renderer {
     }
 
     async init() {
-        const loadImg = (src) => new Promise((resolve, reject) => {
+        const loadImg = (src, key) => new Promise((resolve) => {
             const img = new Image();
-            img.onload = () => resolve(img);
-            img.onerror = reject;
+            img.onload = () => {
+                console.log(`Loaded ${key}`);
+                resolve(img);
+            };
+            img.onerror = () => {
+                console.error(`Failed to load ${key} from ${src}`);
+                // Create a colored placeholder if image fails to load
+                const canvas = document.createElement('canvas');
+                canvas.width = 32; canvas.height = 32;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#ff00ff'; ctx.fillRect(0,0,32,32);
+                const placeholder = new Image();
+                placeholder.src = canvas.toDataURL();
+                resolve(placeholder);
+            };
             img.src = src;
         });
 
         const promises = Object.entries(SPRITE_SHEETS).map(async ([key, src]) => {
-            this.sprites[key] = await loadImg(src);
+            this.sprites[key] = await loadImg(src, key);
         });
 
         await Promise.all(promises);
@@ -42,7 +55,7 @@ export class Renderer {
     }
 
     render(state) {
-        if (!this.loaded) return;
+        if (!this.loaded || !state.map || !state.theme) return;
         const { map, player, theme, entities, items, interactables, sanity } = state;
         const cw = this.canvas.width;
         const ch = this.canvas.height;

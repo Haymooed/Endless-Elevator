@@ -1,10 +1,10 @@
 export const SPRITE_SHEETS = {
-    PROTAGONIST: 'assets/sprites/protagonist sprite sheet.png',
-    TILESET: 'assets/sprites/tileset for a liminal space office building and a creepy hotel.png',
-    ITEMS: 'assets/sprites/pixel art RPG item icons.png',
-    MONSTERS: 'assets/sprites/creepy liminal space monsters.png',
-    NPCS: 'assets/sprites/mysterious NPCs for your game.png',
-    NPCS_ALT: 'assets/sprites/mysterious NPCs for your game 2.png',
+    PROTAGONIST: 'assets/sprites/protagonist%20sprite%20sheet.png',
+    TILESET: 'assets/sprites/tileset%20for%20a%20liminal%20space%20office%20building%20and%20a%20creepy%20hotel.png',
+    ITEMS: 'assets/sprites/pixel%20art%20RPG%20item%20icons.png',
+    MONSTERS: 'assets/sprites/creepy%20liminal%20space%20monsters.png',
+    NPCS: 'assets/sprites/mysterious%20NPCs%20for%20your%20game.png',
+    NPCS_ALT: 'assets/sprites/mysterious%20NPCs%20for%20your%20game%202.png',
 };
 
 export const PROTAGONIST_FRAMES = {

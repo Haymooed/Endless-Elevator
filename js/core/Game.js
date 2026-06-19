@@ -29,6 +29,9 @@ export class Game {
         await this.renderer.init();
         this.setupInput();
         this.setupUI();
+        // Initialize floor 0 immediately to ensure map exists
+        this.travelToFloor(0);
+        // Start loop
         requestAnimationFrame((t) => this.loop(t));
     }
 
@@ -75,9 +78,16 @@ export class Game {
     changeMode(mode) {
         this.state.mode = mode;
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        if (mode === GAME_MODES.MENU) document.getElementById('screen-main').classList.add('active');
-        else if (mode === GAME_MODES.ELEVATOR) document.getElementById('screen-elevator').classList.add('active');
-        else if (mode === GAME_MODES.INVENTORY) document.getElementById('screen-inventory').classList.add('active');
+        const hud = document.getElementById('hud');
+        
+        if (mode === GAME_MODES.MENU) {
+            document.getElementById('screen-main').classList.add('active');
+            hud.style.display = 'none';
+        } else {
+            hud.style.display = 'flex';
+            if (mode === GAME_MODES.ELEVATOR) document.getElementById('screen-elevator').classList.add('active');
+            else if (mode === GAME_MODES.INVENTORY) document.getElementById('screen-inventory').classList.add('active');
+        }
     }
 
     toggleInventory() {
