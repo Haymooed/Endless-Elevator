@@ -17,10 +17,19 @@ export class MapGenerator {
         const startX = Math.floor(width/2);
         const startY = Math.floor(height/2);
         
-        // Elevator room
-        for(let r=-2; r<=2; r++) {
-            for(let c=-2; c<=2; c++) {
+        // Elevator room (Larger for visibility)
+        for(let r=-4; r<=4; r++) {
+            for(let c=-4; c<=4; c++) {
                 map[startY+r][startX+c] = 2;
+            }
+        }
+        
+        // Add walls around the hub room
+        for(let r=-5; r<=5; r++) {
+            for(let c=-5; c<=5; c++) {
+                if (Math.abs(r) === 5 || Math.abs(c) === 5) {
+                    map[startY+r][startX+c] = 1;
+                }
             }
         }
         

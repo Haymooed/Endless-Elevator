@@ -154,25 +154,44 @@ export class Renderer {
     renderLighting(player, theme, sanity) {
         const cw = this.canvas.width;
         const ch = this.canvas.height;
+        
+        // Calculate player screen position
         const screenPx = (player.x + TILE_SIZE/2 - this.camera.x) * this.camera.zoom;
         const screenPy = (player.y + TILE_SIZE/2 - this.camera.y) * this.camera.zoom;
         
-        const darkness = Math.max(0.2, 0.95 - (theme.light * 0.5) + (sanity < 50 ? (50 - sanity) / 100 : 0));
+        // Base darkness
+        let darkness = 0.9 - (theme.light * 0.4);
+        if (sanity < 50) darkness += (50 - sanity) / 100;
+        darkness = Math.max(0.1, Math.min(0.98, darkness));
+
+        // Create an offscreen canvas for lighting to avoid multiply issues
+        if (!this.lightCanvas) {
+            this.lightCanvas = document.createElement('canvas');
+        }
+        if (this.lightCanvas.width !== cw || this.lightCanvas.height !== ch) {
+            this.lightCanvas.width = cw;
+            this.lightCanvas.height = ch;
+        }
+        const lctx = this.lightCanvas.getContext('2d');
         
-        this.ctx.fillStyle = `rgba(0,0,0,${darkness})`;
-        this.ctx.globalCompositeOperation = 'multiply';
-        this.ctx.fillRect(0, 0, cw, ch);
-        
-        const grad = this.ctx.createRadialGradient(screenPx, screenPy, 20, screenPx, screenPy, 200);
-        grad.addColorStop(0, 'rgba(255,255,255,1)');
-        grad.addColorStop(1, 'rgba(0,0,0,0)');
-        
-        this.ctx.globalCompositeOperation = 'destination-out';
-        this.ctx.fillStyle = grad;
-        this.ctx.beginPath();
-        this.ctx.arc(screenPx, screenPy, 200, 0, Math.PI*2);
-        this.ctx.fill();
-        
-        this.ctx.globalCompositeOperation = 'source-over';
+        // Fill with darkness
+        lctx.fillStyle = `rgba(0, 0, 0, ${darkness})`;
+        lctx.fillRect(0, 0, cw, ch);
+
+        // Create light cutout
+        const radius = 200;
+        const grad = lctx.createRadialGradient(screenPx, screenPy, radius * 0.1, screenPx, screenPy, radius);
+        grad.addColorStop(0, 'rgba(0, 0, 0, 1)'); // Full transparent cutout
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0)'); // Fades to darkness
+
+        lctx.globalCompositeOperation = 'destination-out';
+        lctx.fillStyle = grad;
+        lctx.beginPath();
+        lctx.arc(screenPx, screenPy, radius, 0, Math.PI * 2);
+        lctx.fill();
+
+        // Draw the light layer over the main canvas
+        this.ctx.globalCompositeOperation = 'source-over'; // Changed from multiply for better visibility
+        this.ctx.drawImage(this.lightCanvas, 0, 0);
     }
 }
