@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endless Elevator - Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        
+        <!-- UI Overlays -->
+        <div id="screen-main" class="screen active">
+            <h1>The Endless Elevator</h1>
+            <button id="btn-new-game">Enter the Void</button>
+        </div>
+
+        <div id="screen-elevator" class="screen">
+            <h2>Elevator Panel</h2>
+            <div id="floor-buttons"></div>
+            <button onclick="window.game.changeMode('PLAYING')">Close</button>
+        </div>
+
+        <div id="screen-inventory" class="screen">
+            <h2>Inventory</h2>
+            <div id="inventory-list"></div>
+            <button onclick="window.game.changeMode('PLAYING')">Close</button>
+        </div>
+
+        <div id="hud">
+            <div class="stat-group">
+                <div class="stat-label">Health</div>
+                <div class="stat-bar-container"><div id="hp-bar" class="stat-bar" style="width: 100%"></div></div>
+            </div>
+            <div class="stat-group">
+                <div class="stat-label">Sanity</div>
+                <div class="stat-bar-container"><div id="sanity-bar" class="stat-bar" style="width: 100%"></div></div>
+            </div>
+            <div id="floor-display">FLOOR: 0</div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { Game } from './js/core/Game.js';
+        window.game = new Game();
+    </script>
+</body>
+</html>
